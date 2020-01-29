@@ -20,7 +20,10 @@ class Checkout(val itemsInSystem: Item*)(val currentOffers: Offer*) {
     .map { item => (item.toString, item) }.toMap
 }
 
-object Checkout extends Checkout(Apples, Milk, Soup, Bread)(percentageDiscount(BigDecimal("0.10"), Apples)) with App {
+object Checkout extends Checkout(Apples, Milk, Soup, Bread)(
+  percentageDiscount(BigDecimal("0.10"), Apples),
+  buyItemDiscountAnother(BigDecimal("0.50"), 2, Soup, Bread)
+) with App {
   //Filter to only keep valid items
   val checkoutItems: Seq[Item] = args.flatMap(parseArgs)
   val subTotal = checkoutItems.total

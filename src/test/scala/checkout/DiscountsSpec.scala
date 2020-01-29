@@ -5,7 +5,7 @@ import Discounts._
 
 class DiscountsSpec extends FlatSpec {
 
-  "Percentage discount on apples" should "Apply 10% on 1 bag of apples and return 0.10 as discount" in {
+  "Percentage discount" should "Apply 10% on 1 bag of apples and return 0.10 as discount" in {
     val result = percentageDiscount(BigDecimal("0.10"), Apples)(Seq(Apples))
     assert(result === BigDecimal("0.10"))
   }
@@ -23,6 +23,11 @@ class DiscountsSpec extends FlatSpec {
   it should "Apply 10% on a basket with 1 bag of apples and 2 tins of soup and return 0.10 as discount" in {
     val result = percentageDiscount(BigDecimal("0.10"), Apples)(List(Apples, Soup, Soup))
     assert(result === BigDecimal("0.10"))
+  }
+
+  "Buy item discount another" should "Apply 50% off bread when paired with 2 tins of soup and return 0.40 as discount" in {
+    val result = buyItemDiscountAnother(BigDecimal("0.50"), 2, Soup, Bread)(List(Soup, Bread, Soup))
+    assert(result === BigDecimal("0.40"))
   }
 
 }
