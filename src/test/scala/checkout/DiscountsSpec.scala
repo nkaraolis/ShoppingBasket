@@ -30,4 +30,14 @@ class DiscountsSpec extends FlatSpec {
     assert(result === BigDecimal("0.40"))
   }
 
+  it should "Apply no discount off of bread when paired with 1 tin of soup" in {
+    val result = buyItemDiscountAnother(BigDecimal("0.50"), 2, Soup, Bread)(List(Bread, Soup))
+    assert(result === BigDecimal("0"))
+  }
+
+  it should "Apply no discount with a basket of just 2 tins of soup" in {
+    val result = buyItemDiscountAnother(BigDecimal("0.50"), 2, Soup, Bread)(List(Soup, Soup))
+    assert(result === BigDecimal("0"))
+  }
+
 }
